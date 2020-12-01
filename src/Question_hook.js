@@ -22,19 +22,16 @@ function Question() {
     // TODO : update 'ans' for the option you clicked
   }
 
-  const getQuestions = () => {
+  const getQuestions = async () => {
     // TODO : get questions from backend
-    const a = async () => {
       const {
-          data: {msg}
-      } = await instance.get('/api/getContents', { params: { ID: 123 }})
-      let newContent=contents.push(msg)
-      console.log(newContent)
-      setContents(newContent)
-      return
-    }
+          data: {
+            message,
+            contents
+      }} = await instance.get('/getContents')
+      //console.log(contents)
+      setContents(contents)
     //const a = await instance.get('/api/getContents', { params: { ID: 1 }})
-    a()
   }
 
   useEffect(() => {
@@ -49,16 +46,15 @@ function Question() {
         <React.Fragment>
           <div id="question-box">
             <div className="question-box-inner">
-            Question {contents[0]} of 4
+            {'Question '+current_question+1+' of '+contents.length}
             </div>
           </div>
 
           <div id="question-title">
-            
+          {contents[current_question].question}
           </div>
 
           <div id="options">
-            
           </div>
           
           <div id="actions" onClick={next}>

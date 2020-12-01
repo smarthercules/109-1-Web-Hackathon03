@@ -46,9 +46,6 @@ db.on('error', (error) => {
 
 db.once('open', () => {
   console.log('MongoDB connected!')
-  let a = Question.find({})
-  
-  //console.log(a)
 })
 
 

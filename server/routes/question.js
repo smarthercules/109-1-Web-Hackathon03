@@ -6,24 +6,22 @@ exports.GetContents = async (req, res) => {
   //let _id = Question.exportSchema.find({questionID})
   //let _question = Question.exportSchema.find({question})
   //let _options = Question.exportSchema.find({options})
-  const db = mongoose.connection
-  let questionData = Question.find()
-
-  if(!questionData){
-    res.status(403).send({
-      message: 'error',
-      contents: [],
-    })
-    //console.log('no data got')  
-  }
-  else{
-    res.status(200).send({
-      message: 'success',
-      contents: questionData,
-    })
+  Question.find().exec((err, questionData) => {
+    //console.log(questionData)
+    if (err){
+      res.status(403).send({
+        message: 'error',
+        contents: [],
+      })}
+    else{
+      res.status(200).send({
+        message: 'success',
+        contents: questionData,
+      })
+    }
+  })
     //console.log('got data')  
   }
-}
 
 exports.CheckAns = async (req, res) => {
   // TODO : get answers from mongodb,
