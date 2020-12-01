@@ -29,7 +29,7 @@ function Question() {
             message,
             contents
       }} = await instance.get('/getContents')
-      //console.log(contents)
+      console.log(contents)
       setContents(contents)
     //const a = await instance.get('/api/getContents', { params: { ID: 1 }})
   }
@@ -55,6 +55,11 @@ function Question() {
           </div>
 
           <div id="options">
+          {contents[current_question].options.map((a,i)=>(
+          <div className="each-option">
+          <input type="radio" />
+          <span>{contents[current_question].options[i]}</span>
+          </div>))}
           </div>
           
           <div id="actions" onClick={next}>
