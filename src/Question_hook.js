@@ -24,6 +24,17 @@ function Question() {
 
   const getQuestions = () => {
     // TODO : get questions from backend
+    const a = async () => {
+      const {
+          data: {msg}
+      } = await instance.get('/api/getContents', { params: { ID: 123 }})
+      let newContent=contents.push(msg)
+      console.log(newContent)
+      setContents(newContent)
+      return
+    }
+    //const a = await instance.get('/api/getContents', { params: { ID: 1 }})
+    a()
   }
 
   useEffect(() => {
@@ -38,7 +49,7 @@ function Question() {
         <React.Fragment>
           <div id="question-box">
             <div className="question-box-inner">
-
+            Question {contents[0]} of 4
             </div>
           </div>
 
@@ -54,7 +65,7 @@ function Question() {
             NEXT
           </div>
         </React.Fragment>
-        : <React.Fragment></React.Fragment>
+        : <React.Fragment>no content</React.Fragment>
       }
     </div>
   )
